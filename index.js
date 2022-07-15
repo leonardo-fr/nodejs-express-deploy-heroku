@@ -7,8 +7,6 @@ app.get("/", function (req, res) {
     res.send("Aplicação de compra de ingresso do cinema");
 });
 
-const session = require('express-session')
-
 const authController = require('./controllers/authController')
 const eventController = require('./controllers/eventController')
 const localController = require('./controllers/localController')
@@ -21,12 +19,6 @@ const { isAuthenticated } = require('./middlewares/authMiddleware')
 const { isAdmin, isEmployee } = require('./middlewares/userMiddleware')
 
 
-app.use(session({
-    secret: 'secret',
-    resave: false,
-    saveUninitialized: true,
-}))
-app.use(express.json())
 
 app.post('/auth/login', authController.login)
 app.post('/auth/logout', isAuthenticated, authController.logout)
